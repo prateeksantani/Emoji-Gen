@@ -78,7 +78,7 @@ export const BackgroundBeamsWithCollision = ({
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(otherParticle.x, otherParticle.y);
             ctx.strokeStyle = `rgba(255, 255, 255, ${
-              (lineThreshold - distance) / lineThreshold * 0.2
+              ((lineThreshold - distance) / lineThreshold) * 0.2
             })`;
             ctx.stroke();
           }
@@ -106,10 +106,7 @@ export const BackgroundBeamsWithCollision = ({
 
   return (
     <div className={cn("fixed inset-0 -z-10", className)}>
-      <canvas
-        ref={canvasRef}
-        className="bg-slate-950"
-      />
+      <canvas ref={canvasRef} className="bg-slate-950" />
     </div>
   );
 };
@@ -175,7 +172,7 @@ const CollisionMechanism = React.forwardRef<
     const animationInterval = setInterval(checkCollision, 50);
 
     return () => clearInterval(animationInterval);
-  }, [cycleCollisionDetected, containerRef]);
+  }, [cycleCollisionDetected, containerRef, parentRef]);
 
   useEffect(() => {
     if (collision.detected && collision.coordinates) {
@@ -218,7 +215,7 @@ const CollisionMechanism = React.forwardRef<
         }}
         className={cn(
           "absolute left-0 top-20 m-auto h-14 w-px rounded-full bg-gradient-to-t from-indigo-500 via-purple-500 to-transparent",
-          beamOptions.className
+          beamOptions.className,
         )}
       />
       <AnimatePresence>
