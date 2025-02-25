@@ -3,7 +3,6 @@
 import EmojiGenerator from "@/components/EmojiGenerator";
 import EmojiGrid from "@/components/EmojiGrid";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
-import { SignIn } from "@clerk/nextjs";
 
 export default function Home() {
   return (
