@@ -11,9 +11,7 @@ export const BackgroundBeamsWithCollision = ({
 }: {
   className?: string;
 }) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  // Removed the misplaced Particle class definition
-
+const canvasRef = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -34,13 +32,14 @@ export const BackgroundBeamsWithCollision = ({
       vy: number;
 
       constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
+        this.x = Math.random() * (canvas?.width ?? 0);
+        this.y = Math.random() * (canvas?.height ?? 0);
         this.vx = (Math.random() - 0.5) * maxSpeed;
         this.vy = (Math.random() - 0.5) * maxSpeed;
       }
 
       update() {
+        if (!canvas) return;
         this.x += this.vx;
         this.y += this.vy;
 
