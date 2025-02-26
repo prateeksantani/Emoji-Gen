@@ -11,7 +11,7 @@ export const BackgroundBeamsWithCollision = ({
 }: {
   className?: string;
 }) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);  npm run build
 
   useEffect(() => {
     const canvas = canvasRef.current;
