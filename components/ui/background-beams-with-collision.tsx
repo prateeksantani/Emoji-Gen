@@ -11,7 +11,35 @@ export const BackgroundBeamsWithCollision = ({
 }: {
   className?: string;
 }) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);  class Particle {
+    x: number;
+    y: number;
+    vx: number;
+    vy: number;
+  
+    constructor() {
+      // Provide default values if canvas is null
+      const width = canvas?.width ?? window.innerWidth;
+      const height = canvas?.height ?? window.innerHeight;
+      
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.vx = (Math.random() - 0.5) * maxSpeed;
+      this.vy = (Math.random() - 0.5) * maxSpeed;
+    }
+  
+    update() {
+      const width = canvas?.width ?? window.innerWidth;
+      const height = canvas?.height ?? window.innerHeight;
+  
+      this.x += this.vx;
+      this.y += this.vy;
+  
+      if (this.x < 0 || this.x > width) this.vx *= -1;
+      if (this.y < 0 || this.y > height) this.vy *= -1;
+    }
+    // ...rest of the Particle class
+  }
 
   useEffect(() => {
     const canvas = canvasRef.current;
