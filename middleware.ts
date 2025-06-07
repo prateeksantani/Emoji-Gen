@@ -12,6 +12,14 @@ export default clerkMiddleware(async (auth, req) => {
     return NextResponse.redirect(new URL("/sign-in", req.url));
   }
 
+  // Check for guest cookie
+  const isGuest = req.cookies.get("guest_user")?.value === "true";
+
+  // If the user isn't signed in and the route is private, but they're a guest, let them through
+  if (!userId && isProtectedRoute(req) && isGuest) {
+    return NextResponse.next();
+  }
+
   // If the user isn't signed in and the route is private, redirect to sign-in
   if (!userId && isProtectedRoute(req)) {
     return redirectToSignIn({ returnBackUrl: "/" });
